@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build and coverage output
+dist/
+build/
+coverage/
+
+# Playwright output
+playwright-report/
+test-results/
+blob-report/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# TestGen local/generated working state
+.testgen/
