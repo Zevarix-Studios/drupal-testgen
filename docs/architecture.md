@@ -136,6 +136,8 @@ Support state is tracked independently from provenance/confidence:
 
 Uncertainty is preserved as uncertainty rather than collapsed into a guessed value.
 
+The normalized model is also intended to become a reusable developer-intelligence substrate. Once the v0.1 discovery-to-generation architecture is proven, additional outputs should consume this same model rather than reparsing Drupal configuration or creating parallel structural representations.
+
 ## Coverage planning
 
 Coverage planning consumes the normalized model and decides what lifecycle and field behavior can be generated safely.
@@ -150,26 +152,43 @@ Generated navigation uses Drupal routes/paths or project-relative configuration 
 
 The renderer is downstream of the normalized model. Playwright concepts must not leak backward into discovery semantics.
 
-## Planned post-MVP structural diagram export
+## Planned post-MVP model consumers
 
-TestGen will support a post-MVP structural diagram renderer that consumes the same normalized Drupal model used by coverage planning and test generation. The diagram capability must not independently parse raw Drupal configuration or introduce a parallel structural model.
+The following capabilities are explicitly planned after the core v0.1 model and test-generation pipeline are proven. They all consume the same canonical normalized model and remain outside v0.1 acceptance.
 
-The planned output is a UML-style/site-model view of Drupal structure, including where known:
+### Structural diagram export
 
-- fieldable content entity types and bundles;
-- base fields and configurable fields;
-- field types, cardinality, and required/optional state;
-- entity-reference relationships and target entity/bundle constraints;
-- taxonomy vocabulary relationships;
-- other structural entity relationships represented by the normalized model.
+TestGen will support a UML-style/site-model diagram renderer covering fieldable content entity types and bundles, base/configurable fields, field types, cardinality and required state, entity-reference targets, taxonomy relationships, and other structural relationships represented by the model.
 
-Diagram output must preserve TestGen's provenance and uncertainty rules so runtime-dependent, inferred, or otherwise uncertain relationships are distinguishable from confirmed structural facts.
+Diagram output must preserve provenance and uncertainty so runtime-dependent or inferred relationships are distinguishable from confirmed structural facts. Mermaid and PlantUML are the initial candidate formats; Graphviz/DOT may be evaluated later for larger graphs.
 
-Mermaid and PlantUML are the initial candidate output formats. Graphviz/DOT may be evaluated later for large relationship graphs. Exact format priority and CLI surface remain implementation decisions.
+See issue #2.
 
-This feature describes the site's structural model; it does not claim to reverse-engineer arbitrary PHP behavior, custom access logic, workflow side effects, or every runtime semantic.
+### Machine-readable structural manifest
 
-See issue #2 for the planned feature record.
+TestGen will expose a deterministic machine-readable serialization of the normalized model so external tools and future integrations can consume TestGen's structural understanding without independently parsing Drupal YAML or duplicating evidence reconciliation.
+
+The manifest should preserve entity/bundle/field structure, relationships, provenance, confidence, support state, and configuration-completeness/runtime-dependency signals. A public schema should be versioned when it stabilizes.
+
+See issue #4.
+
+### Developer-facing site architecture inventory
+
+TestGen will generate a human-readable site architecture/inventory report suitable for onboarding, architecture documentation, and maintenance review. It should summarize entity types, bundles, fields, relationships, important form/widget metadata, configuration-completeness concerns, runtime dependencies, and uncertainty where known.
+
+This report remains a renderer/consumer of the normalized model rather than a separate discovery path.
+
+See issue #5.
+
+### Structural diff and change-impact analysis
+
+TestGen will compare normalized models to explain meaningful Drupal structural changes rather than merely showing raw YAML diffs. Planned comparisons include entity/bundle additions and removals, field changes, required/cardinality changes, reference target changes, form/widget changes, and completeness/runtime-dependency changes.
+
+Where supported by the normalized model and coverage planner, change analysis should also identify likely test and fixture implications and flag structural changes that warrant migration review. It must remain evidence-backed and explicit about uncertainty rather than predicting arbitrary PHP/runtime behavior.
+
+See issue #6.
+
+These planned consumers strengthen the architectural requirement that the normalized model remain framework-neutral, deterministic, provenance-aware, and independent of any single output format.
 
 ## Generated-source ownership
 
