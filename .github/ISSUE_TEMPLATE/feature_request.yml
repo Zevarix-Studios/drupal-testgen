@@ -1,0 +1,39 @@
+name: Feature request
+description: Propose a new capability or supported Drupal behavior
+title: "[Feature]: "
+labels: []
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: Developer need
+      description: What Drupal testing problem should TestGen solve?
+    validations:
+      required: true
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Likely architecture layer
+      options:
+        - Discovery provider
+        - Normalized model
+        - Coverage planning
+        - Renderer
+        - Fixture strategy
+        - Regeneration/source ownership
+        - CLI/tooling
+        - Unsure
+    validations:
+      required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Scope and evidence
+      description: What evidence can TestGen reliably obtain, and what should remain unsupported or runtime-dependent?
+  - type: checkboxes
+    id: architecture
+    attributes:
+      label: Architecture check
+      options:
+        - label: This request does not require making the canonical model node-specific.
+          required: true

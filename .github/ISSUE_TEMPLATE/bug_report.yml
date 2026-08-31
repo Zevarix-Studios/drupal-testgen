@@ -1,0 +1,31 @@
+name: Bug report
+description: Report incorrect TestGen behavior or generated output
+title: "[Bug]: "
+labels: []
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What happened, and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Drupal/TestGen context
+      description: Include relevant Drupal version, TestGen revision/version, evidence source (exported config/runtime/source), and a minimal reproduction. Redact secrets.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Relevant output
+      description: Paste the smallest useful output, manifest fragment, or generated-source excerpt. Do not include credentials or sensitive configuration.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed secrets and sensitive target-site data.
+          required: true
