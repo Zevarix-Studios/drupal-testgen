@@ -150,6 +150,27 @@ Generated navigation uses Drupal routes/paths or project-relative configuration 
 
 The renderer is downstream of the normalized model. Playwright concepts must not leak backward into discovery semantics.
 
+## Planned post-MVP structural diagram export
+
+TestGen will support a post-MVP structural diagram renderer that consumes the same normalized Drupal model used by coverage planning and test generation. The diagram capability must not independently parse raw Drupal configuration or introduce a parallel structural model.
+
+The planned output is a UML-style/site-model view of Drupal structure, including where known:
+
+- fieldable content entity types and bundles;
+- base fields and configurable fields;
+- field types, cardinality, and required/optional state;
+- entity-reference relationships and target entity/bundle constraints;
+- taxonomy vocabulary relationships;
+- other structural entity relationships represented by the normalized model.
+
+Diagram output must preserve TestGen's provenance and uncertainty rules so runtime-dependent, inferred, or otherwise uncertain relationships are distinguishable from confirmed structural facts.
+
+Mermaid and PlantUML are the initial candidate output formats. Graphviz/DOT may be evaluated later for large relationship graphs. Exact format priority and CLI surface remain implementation decisions.
+
+This feature describes the site's structural model; it does not claim to reverse-engineer arbitrary PHP behavior, custom access logic, workflow side effects, or every runtime semantic.
+
+See issue #2 for the planned feature record.
+
 ## Generated-source ownership
 
 Generated source becomes developer-owned source.
