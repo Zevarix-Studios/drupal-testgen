@@ -34,3 +34,25 @@ Pull requests should explain:
 5. whether public documentation changed.
 
 The project currently targets squash merging for a compact public history.
+
+## Local validation
+
+Use the pinned Node version from `.nvmrc` and the committed npm lockfile:
+
+```bash
+nvm use
+npm ci --ignore-scripts
+npm run check
+```
+
+Focused commands are available when iterating:
+
+```bash
+npm run format:check
+npm run lint
+npm run typecheck
+npm test
+npm run build
+```
+
+See `docs/toolchain.md` for the exact v0.1 dependency/runtime baseline and compatibility decisions.
